@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      role: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        role: mysql
+    spec:
+      containers:
+      - image: cloudgenius/mysql:5.6
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: wordpress
+        - name: MYSQL_USER
+          value: username
+        - name: MYSQL_PASSWORD
+          value: password
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: my-pvc-nfs
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: my-pvc-nfs
+        persistentVolumeClaim:
+          claimName: mysql

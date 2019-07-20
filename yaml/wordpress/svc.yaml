@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wp
+spec:
+  ports:
+    - name: http
+      port: 80
+  selector:
+    role: wp

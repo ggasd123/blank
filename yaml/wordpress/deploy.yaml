@@ -1,0 +1,29 @@
+# This mounts the nfs volume claim into /mnt and continuously
+# overwrites /mnt/index.html with the time and hostname of the pod.
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: wp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: wp
+  template:
+    metadata:
+      labels:
+        role: wp
+    spec:
+      containers:
+      - image: cloudgenius/wp:workshop
+        imagePullPolicy: IfNotPresent
+        name: wp
+        volumeMounts:
+          # name must match the volume name below
+          - name: my-pvc-nfs
+            mountPath: "/var/www/html/"
+      volumes:
+      - name: my-pvc-nfs
+        persistentVolumeClaim:
+          claimName: wp
