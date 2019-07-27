@@ -8,8 +8,8 @@ jobs:
       - checkout
 
       - run:
-          name: Greeting
-          command: echo Hello, world.
+          name: Docker login
+          command: echo $D_PASS | docker login -u $D_USER --password-stdin
 
       - run:
           name: Print the Current Time
