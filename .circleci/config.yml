@@ -18,3 +18,11 @@ jobs:
       - run:
           name: Push mysql image to dockerhub
           command: docker push  cloudgenius/mysql:${CIRCLE_SHA1}
+
+      - run:
+          name: Build a new image for wp
+          command: docker build -t cloudgenius/wp:${CIRCLE_SHA1}   my-wp
+
+      - run:
+          name: Push wp image to dockerhub
+          command: docker push  cloudgenius/wp:${CIRCLE_SHA1}
