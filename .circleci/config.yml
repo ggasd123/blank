@@ -13,7 +13,7 @@ jobs:
 
       - run:
           name: Build a new image for mysql
-          command: docker build -t cloudgenius/mysql:${CIRCLE_SHA1}   .
+          command: docker build -t cloudgenius/mysql:${CIRCLE_SHA1}   my-mysql
 
       - run:
           name: Push mysql image to dockerhub
