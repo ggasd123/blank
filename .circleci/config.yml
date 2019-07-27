@@ -31,7 +31,7 @@ jobs:
           name: grant permissions to k8s
           command: |
             cd $HOME
-            echo "${GKE_SERVICE_ACCOUNT}" | base64 --decode >> /tmp/gke_key.json
+            echo "${GKE_SERVICE_ACCOUNT}" | base64 --decode > /tmp/gke_key.json
             gcloud auth activate-service-account --key-file /tmp/gke_key.json
             gcloud config set project ${GKE_PROJECT_ID}
             gcloud config set compute/zone ${GKE_COMPUTE_ZONE}
