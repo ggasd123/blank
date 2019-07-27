@@ -2,11 +2,11 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: google/cloud-sdk
 
     steps:
       - checkout
-
+      - setup_remote_docker
       - run:
           name: Docker login
           command: echo $D_PASS | docker login -u $D_USER --password-stdin
