@@ -12,5 +12,9 @@ jobs:
           command: echo $D_PASS | docker login -u $D_USER --password-stdin
 
       - run:
-          name: Print the Current Time
-          command: date
+          name: Build a new image for mysql
+          command: docker build -t cloudgenius/mysql:${CIRCLE_SHA1}   .
+
+      - run:
+          name: Push mysql image to dockerhub
+          command: docker push  cloudgenius/mysql:${CIRCLE_SHA1}
