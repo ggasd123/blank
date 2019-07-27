@@ -14,24 +14,24 @@ spec:
         role: mysql
     spec:
       containers:
-      - image: cloudgenius/mysql:5.6
-        name: mysql
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: password
-        - name: MYSQL_DATABASE
-          value: wordpress
-        - name: MYSQL_USER
-          value: username
-        - name: MYSQL_PASSWORD
-          value: password
-        ports:
-        - containerPort: 3306
+        - image: cloudgenius/mysql:322450e2faf1650f08693e93a816cbd8d8041469
           name: mysql
-        volumeMounts:
-        - name: my-pvc-nfs
-          mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+            - name: MYSQL_DATABASE
+              value: wordpress
+            - name: MYSQL_USER
+              value: username
+            - name: MYSQL_PASSWORD
+              value: password
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: my-pvc-nfs
+              mountPath: /var/lib/mysql
       volumes:
-      - name: my-pvc-nfs
-        persistentVolumeClaim:
-          claimName: mysql
+        - name: my-pvc-nfs
+          persistentVolumeClaim:
+            claimName: mysql

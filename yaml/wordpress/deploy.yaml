@@ -16,23 +16,23 @@ spec:
         role: wp
     spec:
       containers:
-      - image: cloudgenius/wp:workshop
-        imagePullPolicy: IfNotPresent
-        name: wp
-        env:
-        - name: WORDPRESS_DB_HOST
-          value: mysql.default.svc.cluster.local
-        - name: WORDPRESS_DB_USER
-          value: username
-        - name: WORDPRESS_DB_PASSWORD
-          value: password
-        - name: WORDPRESS_DB_NAME
-          value: wordpress
-        volumeMounts:
-          # name must match the volume name below
-          - name: my-pvc-nfs
-            mountPath: "/var/www/html/"
+        - image: cloudgenius/wp:322450e2faf1650f08693e93a816cbd8d8041469
+          imagePullPolicy: IfNotPresent
+          name: wp
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: mysql.default.svc.cluster.local
+            - name: WORDPRESS_DB_USER
+              value: username
+            - name: WORDPRESS_DB_PASSWORD
+              value: password
+            - name: WORDPRESS_DB_NAME
+              value: wordpress
+          volumeMounts:
+            # name must match the volume name below
+            - name: my-pvc-nfs
+              mountPath: "/var/www/html/"
       volumes:
-      - name: my-pvc-nfs
-        persistentVolumeClaim:
-          claimName: wp
+        - name: my-pvc-nfs
+          persistentVolumeClaim:
+            claimName: wp
