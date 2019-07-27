@@ -12,14 +12,6 @@ jobs:
           command: echo $D_PASS | docker login -u $D_USER --password-stdin
 
       - run:
-          name: Build a new image for mysql
-          command: docker build -t cloudgenius/mysql:${CIRCLE_SHA1}   my-mysql
-
-      - run:
-          name: Push mysql image to dockerhub
-          command: docker push  cloudgenius/mysql:${CIRCLE_SHA1}
-
-      - run:
           name: Build a new image for wp
           command: docker build -t cloudgenius/wp:${CIRCLE_SHA1}   my-wp
 
@@ -44,6 +36,4 @@ jobs:
             kubectl get deploy
             kubectl set image deployment/wp wp=cloudgenius/wp:${CIRCLE_SHA1}
             kubectl annotate deployment.v1.apps/wp kubernetes.io/change-cause=${CIRCLE_SHA1}
-            kubectl set image deployment/mysql mysql=cloudgenius/mysql:${CIRCLE_SHA1}
-            kubectl annotate deployment.v1.apps/mysql kubernetes.io/change-cause=${CIRCLE_SHA1}
             kubectl get deploy
